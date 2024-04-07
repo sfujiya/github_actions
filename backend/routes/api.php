@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,23 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dummy-data', function () {
-    $data = [
-        [
-            'name' => 'Michael Andrew Fox',
-            'email' => 'john.doe@example.com',
-            'age' => 30,
-        ],
-        [
-            'name' => 'Jane Smith',
-            'email' => 'jane.smith@example.com',
-            'age' => 25,
-        ],
-        [
-            'name' => 'Bob Johnson',
-            'email' => 'bob.johnson@example.com',
-            'age' => 35,
-        ],
-    ];
-    return response()->json($data);
+Route::get('/users', function() {
+    Log::info('ログ出力テスト');
+    return User::all();
 });
