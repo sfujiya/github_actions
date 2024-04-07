@@ -26,7 +26,8 @@ RUN mv /work/web/.env.aws /work/web/.env
 # Laravel環境準備のコマンド
 RUN cd /work/web \
   && composer install \
-  && chmod -R 777 ./storage
+  && chmod -R 777 ./storage \
+  && chmod 777 ./storage/logs/laravel.log
 
 # 起動スクリプトコピー&権限付与
 COPY ./docker/php/startup.sh /usr/local/bin/
