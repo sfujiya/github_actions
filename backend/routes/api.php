@@ -16,6 +16,6 @@ use Illuminate\Foundation\Auth\User;
 */
 
 Route::get('/users', function() {
-    Log::info('ログ出力テスト');s
+    Log::info('ログ出力テスト');
     return User::all();
 });
