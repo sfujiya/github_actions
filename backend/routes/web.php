@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('api/dummy-data');
+    return redirect('api/users');
 });
 
 Route::get('/users', [UsersController::class, 'index'])->name('users.index');
