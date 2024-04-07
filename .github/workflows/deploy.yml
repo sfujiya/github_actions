@@ -2,7 +2,7 @@ name: Deploy AWS
 on:
   push:
     branches:
-      - main
+      - feature/deploy_test
 env:
   ROLE_TO_ASSUME: arn:aws:iam::771105554154:role/GitHubActions
   FRONT_BACKET_NAME: ph5aws-web
