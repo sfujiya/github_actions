@@ -89,16 +89,22 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: test/ph5aws*
-          parse-json-secrets: false
+          parse-json-secrets: true  # JSON形式のシークレットをパースする
+        env:
+          AWS_REGION: ap-northeast-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
 
       - name: Display secrets output
         run: |
-          echo "Secrets output: ${{ steps.get-secrets.outputs['test/ph5aws-OEoNbr'] }}"
+          echo "Secrets output: ${{ toJson(steps.get-secrets.outputs.secret) }}"
 
       - name: Write DB connection info to .env
         run: |
-          echo "DB_HOST=${{ steps.get-secrets.outputs.HOST }}" >> .env
-          echo "DB_PORT=${{ steps.get-secrets.outputs.PORT }}" >> .env
-          echo "DB_DATABASE=${{ steps.get-secrets.outputs.DBCLUSTERIDENTIFIER }}" >> .env
-          echo "DB_USERNAME=${{ steps.get-secrets.outputs.USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ steps.get-secrets.outputs.PASSWORD }}" >> .env
+          echo "DB_HOST=${{ steps.get-secrets.outputs.secret.host }}" >> .env
+          echo "DB_PORT=${{ steps.get-secrets.outputs.secret.port }}" >> .env
+          echo "DB_DATABASE=${{ steps.get-secrets.outputs.secret.dbClusterIdentifier }}" >> .env
+          echo "DB_USERNAME=${{ steps.get-secrets.outputs.secret.username }}" >> .env
+          echo "DB_PASSWORD=${{ steps.get-secrets.outputs.secret.password }}" >> .env
+
