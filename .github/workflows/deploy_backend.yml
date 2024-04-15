@@ -86,14 +86,10 @@ jobs:
           
       - name: Get Secrets from AWS Secrets Manager
         id: get-secrets
-        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        uses: aws-actions/aws-secretsmanager-get-secrets@v2
         with:
           secret-ids: test/ph5aws*
           parse-json-secrets: true  # JSON形式のシークレットをパースする
-        env:
-          AWS_REGION: ap-northeast-1
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Display secrets output
         run: |
@@ -105,5 +101,3 @@ jobs:
           echo "DB_PORT=${{ steps.get-secrets.outputs.secret.port }}" >> .env
           echo "DB_DATABASE=${{ steps.get-secrets.outputs.secret.dbClusterIdentifier }}" >> .env
           echo "DB_USERNAME=${{ steps.get-secrets.outputs.secret.username }}" >> .env
-          echo "DB_PASSWORD=${{ steps.get-secrets.outputs.secret.password }}" >> .env
-          
