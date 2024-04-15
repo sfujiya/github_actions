@@ -96,18 +96,18 @@ jobs:
             DB_PASSWORD,password
           parse-json-secrets: true
           
-      # - name: Get Secrets from AWS Secrets Manager
-      #   id: get-secrets
-      #   uses: aws-actions/aws-secretsmanager-get-secrets@v1
-      #   with:
-      #     secret-ids: |
-      #       ph5aws
-      #     parse-json-secrets: true
+      - name: Get Secrets from AWS Secrets Manager
+        id: get-secrets
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            ph5aws
+          json: true
 
-      # - name: Write DB connection info to .env
-      #   run: |
-      #     echo "DB_HOST=${{ steps.get-secrets.outputs.host }}" >> .env
-      #     echo "DB_PORT=${{ steps.get-secrets.outputs.port }}" >> .env
-      #     echo "DB_DATABASE=${{ steps.get-secrets.outputs.dbClusterIdentifier }}" >> .env
-      #     echo "DB_USERNAME=${{ steps.get-secrets.outputs.username }}" >> .env
-      #     echo "DB_PASSWORD=${{ steps.get-secrets.outputs.password }}" >> .env
+      - name: Write DB connection info to .env
+        run: |
+          echo "DB_HOST=${{ steps.get-secrets.outputs.host }}" >> .env
+          echo "DB_PORT=${{ steps.get-secrets.outputs.port }}" >> .env
+          echo "DB_DATABASE=${{ steps.get-secrets.outputs.dbClusterIdentifier }}" >> .env
+          echo "DB_USERNAME=${{ steps.get-secrets.outputs.username }}" >> .env
+          echo "DB_PASSWORD=${{ steps.get-secrets.outputs.password }}" >> .env
