@@ -89,7 +89,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            aws/secretsmanager
+            ph5aws
           json: true
 
       - name: Display secrets output
