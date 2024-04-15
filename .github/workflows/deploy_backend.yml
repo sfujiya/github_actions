@@ -33,7 +33,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            SECRETS,cicd_secrets
+            SECRETS,ph5aws
           parse-json-secrets: true
 
       - name: Get AWS Account
