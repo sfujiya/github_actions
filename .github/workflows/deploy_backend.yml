@@ -93,7 +93,6 @@ jobs:
 
       - name: Write DB connection info to .env
         run: |
-          echo "DB_CONNECTION=${{ steps.get-secrets.outputs.DB_CONNECTION }}" >> .env
           echo "DB_HOST=${{ steps.get-secrets.outputs.DB_HOST }}" >> .env
           echo "DB_PORT=${{ steps.get-secrets.outputs.DB_PORT }}" >> .env
           echo "DB_DATABASE=${{ steps.get-secrets.outputs.DB_NAME }}" >> .env
