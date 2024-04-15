@@ -97,6 +97,15 @@ jobs:
         run: |
           echo "Secrets output: ${{ toJson(steps.get-secrets.outputs) }}"
 
+      - name: Display secrets output
+        run: |
+          echo "Username: ${{ steps.get-secrets.outputs.USERNAME }}"
+          echo "Password: ${{ steps.get-secrets.outputs.PASSWORD }}"
+          echo "Host: ${{ steps.get-secrets.outputs.HOST }}"
+          echo "Port: ${{ steps.get-secrets.outputs.PORT }}"
+          echo "Database Cluster Identifier: ${{ steps.get-secrets.outputs.DBCLUSTERIDENTIFIER }}"
+
+
       - name: Write DB connection info to .env
         run: |
           echo "DB_HOST=${{ steps.get-secrets.outputs.host }}" >> .env
