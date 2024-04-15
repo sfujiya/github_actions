@@ -89,7 +89,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            ph5aws
+            PH5AWS
           json: true
 
       - name: Display secrets output
@@ -100,6 +100,6 @@ jobs:
         run: |
           echo "DB_HOST=${{ steps.get-secrets.outputs.HOST }}" >> .env
           echo "DB_PORT=${{ steps.get-secrets.outputs.PORT }}" >> .env
-          echo "DB_DATABASE=${{ steps.get-secrets.outputs.DB_CLUSTER_IDENTIFIER }}" >> .env
+          echo "DB_DATABASE=${{ steps.get-secrets.outputs.DBCLUSTERIDENTIFIER }}" >> .env
           echo "DB_USERNAME=${{ steps.get-secrets.outputs.USERNAME }}" >> .env
           echo "DB_PASSWORD=${{ steps.get-secrets.outputs.PASSWORD }}" >> .env
