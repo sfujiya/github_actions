@@ -98,7 +98,7 @@ jobs:
 
       - name: Display secrets output
         run: |
-          echo "Secrets output: ${{ steps.get-secrets.outputs.test/ph5aws-OEoNbr }}"
+          echo "Secrets output: ${{ steps.get-secrets.outputs['test/ph5aws-OEoNbr'] }}"
 
       - name: Write DB connection info to .env
         run: |
