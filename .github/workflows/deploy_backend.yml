@@ -106,4 +106,4 @@ jobs:
           echo "DB_DATABASE=${{ steps.get-secrets.outputs.secret.dbClusterIdentifier }}" >> .env
           echo "DB_USERNAME=${{ steps.get-secrets.outputs.secret.username }}" >> .env
           echo "DB_PASSWORD=${{ steps.get-secrets.outputs.secret.password }}" >> .env
-
+          
