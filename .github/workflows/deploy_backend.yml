@@ -89,7 +89,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            PH5AWS
+            arn:aws:secretsmanager:ap-northeast-1:771105554154:secret:ph5aws-dM8hGE
           json: true
 
       - name: Display secrets output
