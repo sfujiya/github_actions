@@ -99,9 +99,8 @@ jobs:
 
       - name: Write DB connection info to .env
         run: |
-          echo "${{ steps.get-secrets.outputs }}" | jq .
-          echo "DB_HOST=${{ steps.get-secrets.outputs.host }}" >> .env
-          echo "DB_PORT=${{ steps.get-secrets.outputs.port }}" >> .env
-          echo "DB_DATABASE=${{ steps.get-secrets.outputs.dbClusterIdentifier }}" >> .env
-          echo "DB_USERNAME=${{ steps.get-secrets.outputs.username }}" >> .env
-          echo "DB_PASSWORD=${{ steps.get-secrets.outputs.password }}" >> .env
+          echo "DB_HOST=${{ steps.get-secrets.outputs.HOST }}" >> .env
+          echo "DB_PORT=${{ steps.get-secrets.outputs.PORT }}" >> .env
+          echo "DB_DATABASE=${{ steps.get-secrets.outputs.DB_CLUSTER_IDENTIFIER }}" >> .env
+          echo "DB_USERNAME=${{ steps.get-secrets.outputs.USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ steps.get-secrets.outputs.PASSWORD }}" >> .env
