@@ -6,11 +6,6 @@ on:
 env:
   SERVICE_NAME: ph5aws
   ROLE_TO_ASSUME: arn:aws:iam::771105554154:role/GitHubActions
-  DB_HOST: ${{ secrets.DB_HOST }}
-  DB_PORT: ${{ secrets.DB_PORT }}
-  DB_DATABASE: ${{ secrets.DB_NAME }}
-  DB_USERNAME: ${{ secrets.DB_USER }}
-  DB_PASSWORD: ${{ secrets.DB_PASS }}
 jobs:
   deploy:
     name: Deploy
@@ -28,13 +23,6 @@ jobs:
           role-to-assume: ${{ env.ROLE_TO_ASSUME }}
           role-session-name: github-actions-${{ github.run_ad }}
           aws-region: ap-northeast-1
-
-      - name: Get Secrets from AWS Secrets Manager
-        uses: aws-actions/aws-secretsmanager-get-secrets@v1
-        with:
-          secret-ids: |
-            SECRETS,ph5aws
-          parse-json-secrets: true
 
       - name: Get AWS Account
         run: aws sts get-caller-identity
@@ -96,3 +84,18 @@ jobs:
           cluster: ${{ env.SERVICE_NAME }}
           wait-for-service-stability: true
           
+      - name: Get Secrets from AWS Secrets Manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            ph5aws
+          parse-json-secrets: true
+
+      - name: Write DB connection info to .env
+        run: |
+          echo "DB_CONNECTION=${{ steps.get-secrets.outputs.DB_CONNECTION }}" >> .env
+          echo "DB_HOST=${{ steps.get-secrets.outputs.DB_HOST }}" >> .env
+          echo "DB_PORT=${{ steps.get-secrets.outputs.DB_PORT }}" >> .env
+          echo "DB_DATABASE=${{ steps.get-secrets.outputs.DB_NAME }}" >> .env
+          echo "DB_USERNAME=${{ steps.get-secrets.outputs.DB_USER }}" >> .env
+          echo "DB_PASSWORD=${{ steps.get-secrets.outputs.DB_PASS }}" >> .env
