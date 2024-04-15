@@ -83,18 +83,6 @@ jobs:
           service: ${{ env.SERVICE_NAME }}
           cluster: ${{ env.SERVICE_NAME }}
           wait-for-service-stability: true
-
-      # - name: Get Secrets from AWS Secrets Manager
-      #   uses: aws-actions/aws-secretsmanager-get-secrets@v1
-      #   with:
-      #     secret-ids: |
-      #       ph5aws,
-      #       DB_HOST,host
-      #       DB_PORT,port
-      #       DB_DATABASE,dbClusterIdentifier
-      #       DB_USERNAME,username
-      #       DB_PASSWORD,password
-      #     parse-json-secrets: true
           
       - name: Get Secrets from AWS Secrets Manager
         id: get-secrets
@@ -103,6 +91,11 @@ jobs:
           secret-ids: |
             ph5aws
           json: true
+
+      - name: Enable Debug Logging
+        env:
+          ACTIONS_STEP_DEBUG: true
+        run: echo "Debug logging enabled"
 
       - name: Write DB connection info to .env
         run: |
