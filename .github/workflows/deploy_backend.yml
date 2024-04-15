@@ -97,7 +97,8 @@ jobs:
 
       - name: Write DB connection info to .env
         run: |
-          echo "DB_HOST=${{ steps.get-secrets.outputs.secret.host }}" >> .env
-          echo "DB_PORT=${{ steps.get-secrets.outputs.secret.port }}" >> .env
-          echo "DB_DATABASE=${{ steps.get-secrets.outputs.secret.dbClusterIdentifier }}" >> .env
-          echo "DB_USERNAME=${{ steps.get-secrets.outputs.secret.username }}" >> .env
+          echo "DB_HOST=${{ env.TEST_PH5AWS_HOST }}" >> .env
+          echo "DB_PORT=${{ env.TEST_PH5AWS_PORT }}" >> .env
+          echo "DB_DATABASE=${{ env.TEST_PH5AWS_DBCLUSTERIDENTIFIER }}" >> .env
+          echo "DB_USERNAME=${{ env.TEST_PH5AWS_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ env.TEST_PH5AWS_PASSWORD }}" >> .env
