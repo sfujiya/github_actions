@@ -93,7 +93,7 @@ jobs:
 
       - name: Display secrets output
         run: |
-          echo "Secrets output: ${{ toJson(steps.get-secrets.outputs.secret) }}"
+          echo "Secrets output: ${{ steps.get-secrets.outputs.secret }}"
 
       - name: Write DB connection info to .env
         run: |
