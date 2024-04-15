@@ -92,10 +92,9 @@ jobs:
             ph5aws
           json: true
 
-      - name: Enable Debug Logging
-        env:
-          ACTIONS_STEP_DEBUG: true
-        run: echo "Debug logging enabled"
+      - name: Display secrets output
+        run: |
+          echo "Secrets output: ${{ toJson(steps.get-secrets.outputs) }}"
 
       - name: Write DB connection info to .env
         run: |
