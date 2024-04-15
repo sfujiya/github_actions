@@ -89,7 +89,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            arn:aws:secretsmanager:ap-northeast-1:771105554154:secret:ph5aws-dM8hGE
+            arn:aws:secretsmanager:ap-northeast-1:771105554154:secret:test/ph5aws-OEoNbr
           json: true
           region: ap-northeast-1
 
@@ -99,8 +99,8 @@ jobs:
 
       - name: Write DB connection info to .env
         run: |
-          echo "DB_HOST=${{ steps.get-secrets.outputs.HOST }}" >> .env
-          echo "DB_PORT=${{ steps.get-secrets.outputs.PORT }}" >> .env
-          echo "DB_DATABASE=${{ steps.get-secrets.outputs.DBCLUSTERIDENTIFIER }}" >> .env
-          echo "DB_USERNAME=${{ steps.get-secrets.outputs.USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ steps.get-secrets.outputs.PASSWORD }}" >> .env
+          echo "DB_HOST=${{ steps.get-secrets.outputs.host }}" >> .env
+          echo "DB_PORT=${{ steps.get-secrets.outputs.port }}" >> .env
+          echo "DB_DATABASE=${{ steps.get-secrets.outputs.dbClusterIdentifier }}" >> .env
+          echo "DB_USERNAME=${{ steps.get-secrets.outputs.username }}" >> .env
+          echo "DB_PASSWORD=${{ steps.get-secrets.outputs.password }}" >> .env
