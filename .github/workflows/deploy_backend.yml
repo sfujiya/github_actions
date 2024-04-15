@@ -29,6 +29,13 @@ jobs:
           role-session-name: github-actions-${{ github.run_ad }}
           aws-region: ap-northeast-1
 
+        - name: Get Secrets from AWS Secrets Manager
+          uses: aws-actions/aws-secretsmanager-get-secrets@v1
+          with:
+            secret-ids: |
+              SECRETS,cicd_secrets
+            parse-json-secrets: true
+
       - name: Get AWS Account
         run: aws sts get-caller-identity
       
