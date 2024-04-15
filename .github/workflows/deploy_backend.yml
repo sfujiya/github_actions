@@ -88,12 +88,17 @@ jobs:
         id: get-secrets
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
-          secret-ids: |
-            arn:aws:secretsmanager:ap-northeast-1:***:secret:test/ph5aws-OEoNbr
+          secret-ids: test/ph5aws*
+          parse-json-secrets: false
+        env:
+          AWS_REGION: ap-northeast-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
 
       - name: Display secrets output
         run: |
-          echo "Secrets output: ${{ steps.get-secrets.outputs.secret }}"
+          echo "Secrets output: ${{ steps.get-secrets.outputs.test/ph5aws-OEoNbr }}"
 
       - name: Write DB connection info to .env
         run: |
