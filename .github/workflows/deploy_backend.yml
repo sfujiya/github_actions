@@ -88,7 +88,7 @@ jobs:
         id: get-secrets
         uses: aws-actions/aws-secretsmanager-get-secrets@v2
         with:
-          secret-ids: test/ph5aws*
+          secret-ids: test/ph5aws
           parse-json-secrets: true  # JSON形式のシークレットをパースする
 
       - name: Display secrets output
