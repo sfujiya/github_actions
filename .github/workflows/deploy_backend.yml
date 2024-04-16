@@ -43,7 +43,7 @@ jobs:
           docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
           echo "::set-output name=image::${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
 
-            - name: Get Secrets from AWS Secrets Manager
+      - name: Get Secrets from AWS Secrets Manager
         id: get-secrets
         uses: aws-actions/aws-secretsmanager-get-secrets@v2
         with:
